@@ -1139,12 +1139,13 @@ async function parseReq(request){
 async function generateId(){
     //The number of articles read in KV (initialized to 1), and formatted as 6 digits, and zeros are added in front of less than 6 digits
     let article_id_seq=await getIndexNum();
-    if(""===article_id_seq||null===article_id_seq||"[]"===article_id_seq||void 0===article_id_seq){
-        await saveIndexNum(1)
+
+    if(""==article_id_seq||null==article_id_seq||[]==article_id_seq||void 0==article_id_seq){
+        await saveIndexNum(toString(1))
         return "000001"
     }else{
-        await saveIndexNum(parseInt(article_id_seq)+1)
-        return ("00000"+(parseInt(article_id_seq)+1)).substr(-6)
+        await saveIndexNum(toString(parseInt(article_id_seq)+2))
+        return ("00000"+(parseInt(article_id_seq)+2)).substr(-6)
     }
 }
 
